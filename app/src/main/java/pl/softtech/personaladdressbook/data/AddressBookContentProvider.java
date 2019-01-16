@@ -5,25 +5,20 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteQuery;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.provider.ContactsContract;
 
 import pl.softtech.personaladdressbook.R;
 
 public class AddressBookContentProvider extends ContentProvider {
 
     /* Egzemplarz klasy - umożliwia obiektowi ContentProvider uzyskanie dostępu do bazy danych */
-
     private AddressBookDatabaseHelper dbHelper;
 
-    /* Pomocnik obiektu Content Provoder */
-
+    /* Pomocnik obiektu ContentProvoder */
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     /* Stałe obiektu UrlMatcher używane w celu określenia operacji do wykonania na bazie danych */
-
     private static final int ONE_CONTACT = 1; // Wykonanie operacji dla jednego kontaktu.
     private static final int CONTACTS = 2; // Wykonanie operacji dla całej tabeli kontaktów.
 
@@ -39,22 +34,22 @@ public class AddressBookContentProvider extends ContentProvider {
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
 
-        /* Przyjmuje wartość 1, jeżeli aktualizacja przebiegła pomyślnie, w przeciwnym razie 0 */
+        /* Przyjmuje wartość 1, jeżeli usuwanie przebiegła pomyślnie, w przeciwnym razie 0 */
         int numberOfRowsDeleted;
 
         /* Sprawdzam adres URI */
         switch (uriMatcher.match(uri)){
             case ONE_CONTACT:
 
-                /* Odczytanie identyfikatora kontaktu, który ma zostać zaktualizowany */
+                /* Odczytanie identyfikatora kontaktu, który ma zostać usunięty */
                 String id = uri.getLastPathSegment();
 
                 /* Aktualizacja wartość kontaku */
                 numberOfRowsDeleted = dbHelper.getWritableDatabase().delete(DatabaseDescription.Contact.TABLE_NAME,
-                        DatabaseDescription.Contact._ID + "_" + id, selectionArgs);
+                        DatabaseDescription.Contact._ID + "=" + id, selectionArgs);
                 break;
             default:
-                throw new UnsupportedOperationException(getContext().getString(R.string.invalid_delete_url) + uri);
+                throw new UnsupportedOperationException(getContext().getString(R.string.invalid_delete_uri) + uri);
         }
 
         /* Jeżeli dokonano aktualizacji to powiadom obiekty nasłuchujące zmian w bazie danych*/
@@ -62,7 +57,7 @@ public class AddressBookContentProvider extends ContentProvider {
             getContext().getContentResolver().notifyChange(uri, null);
         }
 
-        /* Zwróć info o aktualizacji */
+        /* Zwróć info o usunięciu */
         return numberOfRowsDeleted;
     }
 
@@ -100,7 +95,7 @@ public class AddressBookContentProvider extends ContentProvider {
                 }
                 break;
             default:
-                throw new UnsupportedOperationException(getContext().getString(R.string.invalid_insert_url));
+                throw new UnsupportedOperationException(getContext().getString(R.string.invalid_insert_uri));
         }
 
         /* Zwrócenie adresu URI */
@@ -113,7 +108,7 @@ public class AddressBookContentProvider extends ContentProvider {
         /* Utworzenie obiektu AddressBookDatabaseHelper */
         dbHelper = new AddressBookDatabaseHelper(getContext());
 
-        /* Operacja utworzenia obiektu ContentProvider została zakończona sukccesem */
+        /* Operacja utworzenia obiektu ContentProvider została zakończona sukcesem */
         return true;
     }
 
@@ -126,19 +121,17 @@ public class AddressBookContentProvider extends ContentProvider {
         queryBuilder.setTables(DatabaseDescription.Contact.TABLE_NAME);
 
         /* Wybranie jednego lub wszystkich kontaktów z tabeli */
-
         switch (uriMatcher.match(uri)){
             case ONE_CONTACT:
-                queryBuilder.appendWhere(DatabaseDescription.Contact._ID + "-" + uri.getLastPathSegment());
+                queryBuilder.appendWhere(DatabaseDescription.Contact._ID + "=" + uri.getLastPathSegment());
                 break;
             case CONTACTS:
                 break;
             default:
-                throw new UnsupportedOperationException(getContext().getString(R.string.invalid_query_url) + uri);
+                throw new UnsupportedOperationException(getContext().getString(R.string.invalid_query_uri) + uri);
         }
 
         /* Wykonanie zapytania SQL i inicjalizacja obiektu Cursor */
-
         Cursor cursor = queryBuilder.query(dbHelper.getReadableDatabase(), projection, selection, selectionArgs, null, null, sortOrder);
 
         /* Konfiguracja obiektu Cursor */
@@ -164,10 +157,10 @@ public class AddressBookContentProvider extends ContentProvider {
 
                 /* Aktualizacja wartość kontaku */
                 numberOfRowsUpdated = dbHelper.getWritableDatabase().update(DatabaseDescription.Contact.TABLE_NAME,
-                        values, DatabaseDescription.Contact._ID + "_" + id, selectionArgs);
+                        values, DatabaseDescription.Contact._ID + "=" + id, selectionArgs);
                 break;
             default:
-                throw new UnsupportedOperationException(getContext().getString(R.string.invalid_update_url) + uri);
+                throw new UnsupportedOperationException(getContext().getString(R.string.invalid_update_uri) + uri);
         }
 
         /* Jeżeli dokonano aktualizacji to powiadom obiekty nasłuchujące zmian w bazie danych*/

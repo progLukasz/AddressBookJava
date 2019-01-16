@@ -31,7 +31,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             super(view);
 
             /* Inicjalizacja widoku TextView */
-            textView = (TextView) view.findViewById(R.id.text);
+            textView = (TextView) view.findViewById(android.R.id.text1);
 
             /* Podłącz do obiektu View obiekt nasłuchujący zdarzeń */
             view.setOnClickListener(new View.OnClickListener(){

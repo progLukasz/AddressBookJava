@@ -17,10 +17,10 @@
     <string name="hint_street">Ulica</string>
     <string name="hint_zip">Kod pocztowy</string>
     <string name="insert_failed">Błąd wstawiania:</string>
-    <string name="invalid_delete_url">Błąd kasowania - identyfikator Url:</string>
-    <string name="invalid_insert_url">Błąd wstawiania - identyfikator Url:</string>
-    <string name="invalid_query_url">Błąd zapytania - identyfikator Url:</string>
-    <string name="invalid_update_url">Błąd aktualizacji - identyfikator Url:</string>
+    <string name="invalid_delete_uri">Błąd kasowania - identyfikator Url:</string>
+    <string name="invalid_insert_uri">Błąd wstawiania - identyfikator Url:</string>
+    <string name="invalid_query_uri">Błąd zapytania - identyfikator Url:</string>
+    <string name="invalid_update_uri">Błąd aktualizacji - identyfikator Url:</string>
     <string name="label_city">Miasto:</string>
     <string name="label_email">E-mail:</string>
     <string name="label_name">Nazwa:</string>

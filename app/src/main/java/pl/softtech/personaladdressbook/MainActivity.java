@@ -5,10 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import pl.softtech.personaladdressbook.data.DatabaseDescription;
 
 public class MainActivity extends AppCompatActivity implements ContactsFragment.ContactFragmentListener,
         DetailFragment.DetailFragmentListener, AddEditFragment.AddEditFragmentListener {
@@ -32,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements ContactsFragment.
          * i wyświetlamy fragment ContactsFragment */
         if (savedInstanceState == null && findViewById(R.id.fragmentContainer) != null) {
 
-            /* Utworzenie fragmentu COntactsFragment */
+            /* Utworzenie fragmentu ContactsFragment */
             contactsFragment = new ContactsFragment();
 
             /* Dodanie fragmentu do rozkładu FrameLayout */

@@ -26,14 +26,14 @@ import pl.softtech.personaladdressbook.data.DatabaseDescription;
 
 public class AddEditFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-   /* Interfejs z metodą wywołania zwrotnego implementowaną przez główną aktywność */
+    /* Interfejs z metodą wywołania zwrotnego implementowaną przez główną aktywność */
     public interface AddEditFragmentListener{
 
         /* Wywołanie gdy kontakt jest zapisywany */
-       void onAddEditCompleted(Uri contactUri);
-   }
+        void onAddEditCompleted(Uri contactUri);
+    }
 
-   /* Pole używane do identyfikacji obiektu Loader */
+    /* Pole używane do identyfikacji obiektu Loader */
     private static final int CONTACT_LOADER = 0;
 
     /* Pole obiektu implementującego zagnieżdżony interfejs - główna aktywność (MainActivity) */
@@ -112,7 +112,8 @@ public class AddEditFragment extends Fragment implements LoaderManager.LoaderCal
             public void onClick(View v){
 
                 /* Ukrycie klawiatury ekranowej */
-                ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromInputMethod(getView().getWindowToken(), 0);
+                ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).
+                        hideSoftInputFromInputMethod(getView().getWindowToken(), 0);
 
                 /* Zapisanie kontaktu w bazie danych */
                 saveContact();

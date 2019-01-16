@@ -23,7 +23,7 @@ public class AddressBookDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
 
         /* Zapytnie SQL tworzące tabelę w bazie danych */
-        final String CREAATE_CONTACTS_TABLE =
+        final String CREATE_CONTACTS_TABLE =
                 "CREATE TABLE " + DatabaseDescription.Contact.TABLE_NAME +
                         "(" + DatabaseDescription.Contact._ID + " integer primary key, " +
                         DatabaseDescription.Contact.COLUMN_NAME + " TEXT, " +
@@ -35,7 +35,7 @@ public class AddressBookDatabaseHelper extends SQLiteOpenHelper {
                         DatabaseDescription.Contact.COLUMN_ZIP + " TEXT);";
 
         /* Egzekucja zapytania SQL */
-        db.execSQL(CREAATE_CONTACTS_TABLE);
+        db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
     @Override
